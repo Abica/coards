@@ -1,0 +1,105 @@
+<project basedir="." default="devserver">
+
+  <property name="app-id" value="coards"/>
+  <property name="app-display-name" value="Clojure message board system" />
+
+  <property environment="env" />
+  <property name="sdk.dir" location="./sdk/" />
+  <property name="classes.dir" value="war/WEB-INF/classes/" />
+  <property name="lib.dir" value="war/WEB-INF/lib/" />
+  <property name="src.dir" value="src" />
+  <property name="war.dir" value="war" />
+
+  <property name="sdk.file" value="sdk.zip"/>
+  <property name="compojure.file" value="lib.zip"/>
+
+  <property name="compojure.url" value="http://cloud.github.com/downloads/nakkaya/appengine-stub/${compojure.file}"/>
+  <property name="sdk.url" value="http://cloud.github.com/downloads/nakkaya/appengine-stub/${sdk.file}"/>
+
+  <import file="${sdk.dir}/config/user/ant-macros.xml" optional="true"/>
+
+  <path id="project.classpath">
+    <pathelement path="${classes.dir}" />
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar" />
+    </fileset>
+    <fileset dir="${sdk.dir}/lib">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+
+  <target name="clean">
+    <delete dir="${classes.dir}" />
+  </target>
+
+  <target name="init">
+    <mkdir dir="${classes.dir}" />
+  </target>
+
+
+  <target name="compile" depends="clean,init">
+    <java classname="clojure.lang.Compile"
+	  classpathref="project.classpath" failonerror="true">
+      <classpath path="${src.dir}" />
+      <sysproperty key="clojure.compile.path" value="${classes.dir}" />
+      <arg value="servlet" />
+    </java>
+  </target>
+
+
+  <target name="devserver"
+	  description="run local dev appserver"
+	  depends="compile">
+    <dev_appserver war="war/" />
+  </target>
+
+  <target name="deploy"
+	  description="deploy to appspot"
+	  depends="compile">
+    <appcfg action="update" war="war" />
+  </target>
+
+<target name="deps" description="Download dependencies and unzip">
+  <get usetimestamp="true"
+       description="Google App Engine SDK"
+       src="${sdk.url}"
+       dest="${sdk.file}"/>
+
+  <unzip src="${sdk.file}" dest="."/>
+
+  <delete file="${sdk.file}"/>
+  <delete dir="__MACOSX"/>
+
+  <get usetimestamp="true"
+       description="Google App Engine SDK"
+       src="${compojure.url}"
+       dest="${compojure.file}"/>
+
+  <unzip src="${compojure.file}" dest="./war/WEB-INF/"/>
+
+  <delete file="${compojure.file}"/>
+  <delete dir="./war/WEB-INF/__MACOSX"/>
+
+</target>
+
+<target name="check-setup">
+    <available file="README.markdown"  property="do.setup"/>
+</target>
+
+<target name="setup" depends="check-setup,deps" if="do.setup">
+
+  <echo message="Creating Template"/>
+
+  <replace file="${src.dir}/servlet.clj"
+	   token="{{ app-id }}" value="${app-id}"/>
+
+  <replace file="${war.dir}/WEB-INF/appengine-web.xml"
+	   token="{{ app-id }}" value="${app-id}"/>
+
+  <replace file="${war.dir}/WEB-INF/web.xml"
+	   token="{{ app-display-name }}" value="${app-display-name}"/>
+
+  <delete file="README.markdown"/>
+</target>
+
+</project>
