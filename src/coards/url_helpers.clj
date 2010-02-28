@@ -13,8 +13,8 @@
 (defn create-board-url []
   "/admin/create-board.html")
 
-(defn post-url [id]
-  (str "/post/" id ".html"))
+(defn post-url [board-id post-id]
+  (str "/board/" board-id "/post/" post-id ".html"))
 
 (defn create-post-url [board-id]
   (str "/board/" board-id "create-post.html"))
