@@ -2,6 +2,8 @@
   (:import
     (com.google.appengine.api.users User UserService UserServiceFactory)))
 
+(defn get-user-info [request]
+  (:appengine-clj/user-info request))
 
 (defn user-info
   "With no arguments, returns a UserService and User for the current request in a map keyed by :user-service and :user respectively.
@@ -12,6 +14,12 @@
      {:user (.getCurrentUser user-service) :user-service user-service}))
   ([request]
    (:appengine-clj/user-info request)))
+
+(defn logged-in?
+  "determine whether or not a user is logged in"
+  ([]
+    (logged-in? (user-info)))
+  ([info] (:user info)))
 
 (defn wrap-with-user-info
   "Ring middleware method that wraps an application so that every request will have

@@ -1,5 +1,4 @@
 (ns coards.layout
-  (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use (compojure.html gen page-helpers form-helpers)
         (appengine-clj users)
         (coards url-helpers)))
@@ -14,8 +13,17 @@
 (defn breadcrumb-trail []
   "Boards -> Programming -> Yo..")
 
+(defn render-login-link [request]
+  (let [info (:appengine-clj/user-info request)
+        user (:user info)
+        user-service (:user-service info)]
+    (if (logged-in? info)
+       [:span.user "Logged in as " (.getNickname user) " ("
+         (link-to (.createLogoutURL user-service (:uri request)) "logout") ")"]
+       [:span.user (link-to (.createLoginURL user-service (:uri request)) "login to comment")])))
+
 (defn layout
-  [title & body]
+  [request title & body]
   (html
     (doctype "xhtml/transitional")
     [:html
@@ -27,13 +35,11 @@
         [:div#header
           [:h1#logo "Coards"]
           [:div#nav-container
-            [:span.user "Logged in as " (.getNickname (:user (user-info)))]
-            (navigation-links {(boards-url)  "Boards"
-                               (board-url 3) "A Board"
-                               (post-url 4 5)  "Posts"})
-           ]
-          [:div.clear]
-         ]
+            (render-login-link request)
+            (navigation-links {(boards-url)   "Boards"
+                               (board-url 3)  "The Film Board"
+                               (post-url 4 5) "A Missing Post"})]
+          [:div.clear]]
         [:div#content
           [:div#breadcrumb
             (breadcrumb-trail)]

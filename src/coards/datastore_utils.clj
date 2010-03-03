@@ -4,27 +4,6 @@
   (:use (coards layout utils url-helpers)
         (appengine-clj datastore users)))
 
-; from http://www.fatvat.co.uk/2009/05/data-persistence-in-gae-with-clojure.html
-(defn store
-  [entity-type data]
-  (let [entity (Entity. (.toString entity-type))]
-    (doseq [[k v] data]
-            (.setProperty entity (.toString k) v))
-    (.put (DatastoreServiceFactory/getDatastoreService) entity)
-    (.getKey entity)))
-
-; from http://www.fatvat.co.uk/2009/05/data-persistence-in-gae-with-clojure.html
-;(defn entity-to-map
- ; [entity]
-  ;(into (hash-map) (.getProperties entity)))
-
-; from http://www.fatvat.co.uk/2009/05/data-persistence-in-gae-with-clojure.html
-(defn getEntity
-  [entity-type id]
-  (let [k (KeyFactory/createKey (.toString entity-type) (Long/valueOf id))]
-    (entity-to-map
-      (.get (DatastoreServiceFactory/getDatastoreService) k))))
-
 (def -all-boards [
                   {:id 1 :title "Discussion" :desc "General purpose discussion"
                    :posts [
@@ -53,13 +32,17 @@
 ; utilities
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn find-board [id]
-  (some #(and
-            (= (Integer. id) (% :id))
-            %)
-        -all-boards))
+  (get-entity "Board" id))
+;  (some #(and
+ ;           (= (Integer. id) (% :id))
+  ;          %)
+   ;     -all-boards))
+
+(defn find-boards []
+  (find-all (doto (Query. "Board") (.addSort "date"))))
 
 (defn posts-for-board [board]
-  (:posts board))
+  (.getChildren (key-for board)))
 
 (defn find-post [board-id post-id]
   (let [board (find-board board-id)]
@@ -67,3 +50,10 @@
               (= (Integer. post-id) (% :id))
               %)
           (posts-for-board board))))
+
+(defn a-create-board [user title message]
+  (create {:kind "Board" :author user :title title :message message :date (java.util.Date.)}))
+
+(defn a-create-post [user parent title message]
+  (create {:kind "Post" :author user :title title :message message :date (java.util.Date.)}
+          (key-for parent)))

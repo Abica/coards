@@ -1,9 +1,6 @@
 (ns coards.url-helpers
-  (:gen-class :extends javax.servlet.http.HttpServlet)
   (:use (compojure.html gen page-helpers form-helpers)
-        compojure.http
-        (compojure control)
-        (coards layout utils)))
+        (coards utils)))
 
 (defn boards-url [] "/boards.html")
 
@@ -17,4 +14,4 @@
   (str "/board/" board-id "/post/" post-id ".html"))
 
 (defn create-post-url [board-id]
-  (str "/board/" board-id "create-post.html"))
+  (str "/board/" board-id "/create-post.html"))
