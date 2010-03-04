@@ -19,7 +19,7 @@
 (defn create-reply-url [post-id]
   (str "/post/" post-id "/create-post.html"))
 
-(defmulti url-for :kind :default :d)
+(defmulti url-for :kind)
 (defmethod url-for "Post" [x] (post-url (:id x)))
 (defmethod url-for "Board" [x] (board-url (:id x)))
-(defmethod url-for :d [x] (println x))
+(defmethod url-for :default [x] (boards-url))

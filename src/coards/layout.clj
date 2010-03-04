@@ -25,7 +25,11 @@
                   []
                   (repeat 3 object))]
     (interpose " > "
-                (map breadcrumb-link-for (apply get-entities parents)))))
+                (map breadcrumb-link-for
+                     (concat [{:title "Board"}]
+                             (if (empty? parents)
+                                 []
+                                 (apply get-entities parents)))))))
 
 (defn render-login-link [request]
   (let [info (:appengine-clj/user-info request)

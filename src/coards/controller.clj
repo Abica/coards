@@ -14,7 +14,7 @@
   (let [board (find-board id)]
     (if board
       (layout request "Viewing board"
-        [:div#breadcrumb (breadcrumb-link-for board)]
+        [:div#breadcrumb (breadcrumb-trail-for nil)]
         (render-board board)
         (render-posts-for board)
         (render-comment-form (create-post-url id) "Add Topic" board))

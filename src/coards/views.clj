@@ -51,7 +51,6 @@
 
 (defn render-replies-for [post]
   (let [posts (posts-for post)]
-    (println posts)
     [:div#replies
       [:ul
         (map
