@@ -7,13 +7,32 @@
         (coards controller utils url-helpers models)))
 
 (defroutes coards-app
-  (GET  (boards-url)                  (list-boards  request))
-  (GET  (board-url :id)               (view-board   request (:id params)))
-  (POST (create-post-url :board-id)   (create-post  request params (:board-id params)))
-  (GET  (post-url :board-id :post-id) (view-post    request (:board-id params) (:post-id params)))
-  (POST (create-board-url)            (create-board request params))
-  (POST "/add-comment/:id"            (create-post  request params))
-  (GET "/"                            (home))
+  ; view all boards
+  (GET  (boards-url)
+        (list-boards request))
+
+  ; view a board
+  (GET  (board-url :id)
+        (view-board request (:id params)))
+
+  ; view a post
+  (GET  (post-url :id)
+        (view-post request (:id params)))
+
+  ; create a new board
+  (POST (create-board-url)
+        (create-board request params))
+
+  ; create a new topic
+  (POST (create-post-url :parent-id)
+        (create-post request params find-board (:parent-id params)))
+
+  ; create a new reply
+  (POST (create-reply-url :parent-id)
+        (create-post request params find-post (:parent-id params)))
+
+  ; index
+  (GET "/" (home))
 
   ; static files and error handling
   (GET "/*" (or (serve-file (params :*)) :next))

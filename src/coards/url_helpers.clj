@@ -7,11 +7,19 @@
 (defn board-url [id]
   (str "/board/" id ".html"))
 
+(defn post-url [post-id]
+  (str "/post/" post-id ".html"))
+
 (defn create-board-url []
   "/admin/create-board.html")
 
-(defn post-url [board-id post-id]
-  (str "/board/" board-id "/post/" post-id ".html"))
-
 (defn create-post-url [board-id]
   (str "/board/" board-id "/create-post.html"))
+
+(defn create-reply-url [post-id]
+  (str "/post/" post-id "/create-post.html"))
+
+(defmulti url-for :kind :default :d)
+(defmethod url-for "Post" [x] (post-url (:id x)))
+(defmethod url-for "Board" [x] (board-url (:id x)))
+(defmethod url-for :d [x] (println x))

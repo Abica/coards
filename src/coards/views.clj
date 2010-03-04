@@ -3,8 +3,6 @@
         (appengine-clj datastore users)
         (coards utils url-helpers models)))
 
-(defn render-replies-for [post])
-
 (defn render-comment-form
   ([post]
     (render-comment-form (str "/add-comment/" (post :id)) "Add Comment" post))
@@ -31,24 +29,33 @@
       [:h2 (link-to (board-url id) title)]
       [:p message]]))
 
-(defn render-full-post [board post]
+(defn render-full-post [post]
   (let [id (:id post) title (:title post) author (:author post)]
-    (println post)
     [:div#post
-      [:h3 (link-to (post-url (:id board) id) title)]
+      [:h3.post-header title]
       [:div.post-body (:message post)]
       [:p "Posted by " (.getNickname author)]]))
 
 (defn render-post-item [board post]
   (let [id (:id post) title (:title post) author (:author post)]
     [:div.topic-item
-      [:h3 (link-to (post-url (:id board) id) title)]
+      [:h3 (link-to (post-url id) title)]
       [:p "Posted by " (.getNickname author)]]))
 
 (defn render-posts-for [board]
-  (let [posts (posts-for-board board)]
-    (println posts)
+  (let [posts (posts-for board)]
     [:div#posts
       (if (empty? posts)
         "There are no posts on this board. Be the first to create one!"
         (map (partial render-post-item board) posts))]))
+
+(defn render-replies-for [post]
+  (let [posts (posts-for post)]
+    (println posts)
+    [:div#replies
+      [:ul
+        (map
+          (fn [p] [:li
+                    (link-to (post-url (:id p))
+                             (:title p))])
+           posts)]]))
