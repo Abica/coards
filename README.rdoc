@@ -3,6 +3,8 @@ Coards is a simple message board system written in Clojure using the Compojure w
 
 Right now the project is still very rough, and I haven't fixed the build script so the repo currently contains all of the jars needed to run and deploy the app.
 
+A hosted version of coards is available at http://coards.appspot.com/boards.html that can be used to check current progress.
+
 = Running
 Simply go into the directory and run:
   ant
