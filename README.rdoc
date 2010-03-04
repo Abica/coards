@@ -1,0 +1,15 @@
+= Description
+Coards is a simple message board system written in Clojure using the Compojure web framework. Coards is written specifically to run on the Google App Engine.
+
+Right now the project is still very rough, and I haven't fixed the build script so the repo currently contains all of the jars needed to run and deploy the app.
+
+= Running
+Simply go into the directory and run:
+  ant
+
+= Deployment
+If you have the app engine sdk installed you can deploy directly to app engine by running:
+  ant deploy
+
+Or you can also use appcfg.py to deploy:
+  /location/to/appcfg.py update war
