@@ -1,0 +1,18 @@
+[ ] Boards
+  [ ] ability to add boards needs to be admin only
+  [ ] sanitize display of html
+[ ] Posts
+  [ ] cleanup the way posts are being queried
+  [ ] ability to delete posts
+  [ ] fix the display of replies
+  [ ] ability to edit posts
+  [ ] sanitize display of html
+  [ ] add support for a markup language
+[ ] Settings
+  [ ] allow users to view replies in a flat or threaded form
+[ ] Admin
+  [ ] Ability to delete any post
+  [ ] Ability to delete any board
+  [ ] Ability to edit any post
+  [ ] Ability to edit any board
+  [ ] Ability to add or remove a user as an admin
