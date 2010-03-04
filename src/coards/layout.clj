@@ -26,7 +26,7 @@
                   (repeat 3 object))]
     (interpose " > "
                 (map breadcrumb-link-for
-                     (concat [{:title "Board"}]
+                     (concat [{:title "Boards"}]
                              (if (empty? parents)
                                  []
                                  (apply get-entities parents)))))))
