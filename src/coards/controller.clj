@@ -8,7 +8,8 @@
 (defn list-boards [request]
   (layout request "Message boards"
     [:div#boards
-      (map render-board (find-boards))]))
+      (map render-board (find-boards))]
+    (render-comment-form (create-board-url) "Add Board" nil)))
 
 (defn view-board [request id]
   (let [board (find-board id)]
@@ -31,10 +32,11 @@
       (page-not-found))))
 
 (defn create-board [request params]
-  (do-create-board (:user (:appengine-clj/user-info request))
-                  (:title params)
-                  (:body params))
-  (redirect-to (boards-url)))
+  (redirect-to
+    (board-url
+      (:id (do-create-board (:user (:appengine-clj/user-info request))
+                            (:title params)
+                            (:body params))))))
 
 (defn create-post [request params find-parent-func parent-id]
   (let [parent (find-parent-func parent-id)]

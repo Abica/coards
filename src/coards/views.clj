@@ -55,6 +55,6 @@
       [:ul
         (map
           (fn [p] [:li
-                    (link-to (post-url (:id p))
+                    (link-to (url-for p)
                              (:title p))])
            posts)]]))
