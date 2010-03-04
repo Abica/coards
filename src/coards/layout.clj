@@ -55,8 +55,8 @@
             [:div#nav-container
               (render-login-link request)
               (navigation-links {(boards-url)   "Boards"
-                                 (board-url 3)  "The Film Board"
-                                 (post-url 5) "A Missing Post"})]
+                                 (post-url 5000) "A Missing Post"
+                                 "http://github.com/Abica/coards" "Source Code"})]
             [:div.clear]]
           [:div#content
              body]
