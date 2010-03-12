@@ -23,19 +23,15 @@
   (filter #(not= (:key parent) (:key %))
           posts))
 
-(defn replies-for [parent]
- (let [posts (find-all (doto (Query. "Post" (:key parent))
-                             (.addSort "date")))]
-   (sort-by #(-> (:key %) .getParent .getName)
-            (except parent posts))))
+(defn max-depth [depth posts]
+  (filter #(-> %
+             (partial split-at "/")
+             count
+             (partial > depth))
+           posts))
 
+;FIXME: figure out how to use PM.getObjectById
 (defn find-post [post-id]
-;(let [query (doto (Query. "Post")
-;                  (.addFilter "id" Query$FilterOperator/EQUAL (Long/valueOf post-id)))]
-
-;  (println (.getFilterPredicates query))
-;  (println (map #(type (:id %)) (find-posts)))
-;  (println (find-all query))
   (let [posts (find-posts)]
     (first
       (filter #(= (Long/valueOf post-id) (:id %))

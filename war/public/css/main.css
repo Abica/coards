@@ -43,8 +43,16 @@ a {
   border-bottom: 5px solid #570026;
 }
 
-#posts {
+#posts, #replies {
   margin-top: 1em;
+}
+
+#replies li {
+  margin-left: 1em;
+}
+
+.post-body {
+  margin-bottom: 1em;
 }
 
 .user {

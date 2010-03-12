@@ -25,7 +25,8 @@
                       (concat [{:title "Boards"}]
                               (if (empty? parents)
                                   []
-                                  (map get-entity (rest parents))))))))
+                                  (map get-entity
+                                       (reverse (rest parents)))))))))
 
 (defn render-login-link [request]
   (let [info (:appengine-clj/user-info request)
@@ -51,7 +52,6 @@
             [:div#nav-container
               (render-login-link request)
               (navigation-links {(boards-url)   "Boards"
-                                 (post-url 5000) "A Missing Post"
                                  "http://github.com/Abica/coards" "Source Code"})]
             [:div.clear]]
           [:div#content

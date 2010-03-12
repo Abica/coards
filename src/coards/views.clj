@@ -49,19 +49,19 @@
         "There are no posts on this board. Be the first to create one!"
         (map (partial render-post-item board) posts))]))
 
+(declare render-tree)
+
 (defn render-node-link [post]
   [:li
     (link-to (url-for post)
-             (:title post))])
+             (:title post))
+    (-> post posts-for render-tree)])
 
 (defn render-tree [nodes]
   [:ul
-   (println "DD >>> " nodes)
-   (map render-node-link nodes)]
-  )
+   (map render-node-link nodes)])
 
 (defn render-replies-for [post]
-  (let [posts (replies-for post)]
-    (println posts)
+  (let [posts (posts-for post)]
     [:div#replies
       (render-tree posts)]))
