@@ -4,7 +4,7 @@
 [ ] Posts
   [ ] cleanup the way posts are being queried
   [ ] ability to delete posts
-  [ ] fix the display of replies
+  [x] fix the display of replies
   [ ] ability to edit posts
   [ ] sanitize display of html
   [ ] add support for a markup language
