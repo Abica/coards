@@ -84,7 +84,7 @@
 </target>
 
 <target name="check-setup">
-    <available file="README.markdown"  property="do.setup"/>
+    <available file="README.rdoc"  property="do.setup"/>
 </target>
 
 <target name="setup" depends="check-setup,deps" if="do.setup">
