@@ -10,26 +10,22 @@
     (for [pair links]
       [:li (link-to (key pair) (val pair))])])
 
-
 (defn breadcrumb-link-for [object]
   [:span.breadcrumb
     (link-to (url-for object) (:title object))])
 
-; FIXME: yuck
 (defn breadcrumb-trail-for [object]
-  (let [parents (reduce
-                  (fn [xs x]
-                    (if x
-                        (conj xs (.getParent (:key x)))
-                        []))
-                  []
-                  (repeat 3 object))]
-    (interpose " > "
-                (map breadcrumb-link-for
-                     (concat [{:title "Boards"}]
-                             (if (empty? parents)
-                                 []
-                                 (apply get-entities parents)))))))
+  (let [parents
+          (take-while #(not (nil? %))
+                       (iterate #(.getParent
+                                   (or (:key %) %))
+                                object))]
+     (interpose " > "
+                 (map breadcrumb-link-for
+                      (concat [{:title "Boards"}]
+                              (if (empty? parents)
+                                  []
+                                  (map get-entity (rest parents))))))))
 
 (defn render-login-link [request]
   (let [info (:appengine-clj/user-info request)

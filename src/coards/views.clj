@@ -56,9 +56,8 @@
 
 (defn render-tree [nodes]
   [:ul
-    (map
-      render-node-link
-      nodes)]
+   (println "DD >>> " nodes)
+   (map render-node-link nodes)]
   )
 
 (defn render-replies-for [post]
