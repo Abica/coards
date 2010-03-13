@@ -1,5 +1,5 @@
 [ ] Boards
-  [ ] ability to add boards needs to be admin only
+  [x] ability to add boards needs to be admin only
   [x] sanitize display of html
 [ ] Posts
   [ ] cleanup the way posts are being queried
@@ -22,6 +22,7 @@
   [ ] Ability to edit any board
   [ ] Ability to add or remove a user as an admin
 [ ] Overall
+  [ ] add some sort of feedback such as flash messages
   [ ] fix build script to download neccessary jars
   [ ] add pretty 404 page for when a post/board is not found
   [x] settle on either keys or ids throughout the app (keys for now)

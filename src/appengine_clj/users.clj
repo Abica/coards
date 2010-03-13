@@ -21,6 +21,13 @@
     (logged-in? (user-info)))
   ([info] (:user info)))
 
+(defn admin?
+  "determine whether currently logged in user is an admin account"
+  []
+  (let [info (user-info)]
+    (if (logged-in? info)
+      (-> info :user-service .isUserAdmin))))
+
 (defn wrap-with-user-info
   "Ring middleware method that wraps an application so that every request will have
   a user-info map assoc'd to the request under the key :appengine-clj/user-info."

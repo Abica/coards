@@ -9,7 +9,8 @@
   (layout request "Message boards"
     [:div#boards
       (map render-board-item (find-boards))]
-    (render-comment-form (create-board-url) "Add Board" nil)))
+      (if (admin?)
+          (render-comment-form (create-board-url) "Add Board" nil))))
 
 (defn view-board [request encoded-key]
   (let [board (find-object encoded-key)]
@@ -32,11 +33,13 @@
       (page-not-found))))
 
 (defn create-board [request params]
-  (redirect-to
-    (board-url
-      (:encoded-key (do-create-board (:user (:appengine-clj/user-info request))
-                                     (:title params)
-                                     (:body params))))))
+  (if (admin?)
+    (redirect-to
+      (board-url
+        (:encoded-key (do-create-board (:user (:appengine-clj/user-info request))
+                                       (:title params)
+                                       (:body params)))))
+    (page-not-found)))
 
 (defn create-post [request params parent-id]
   (let [parent (find-object parent-id)]
