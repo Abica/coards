@@ -4,22 +4,16 @@
   (:use (coards layout utils url-helpers)
         (appengine-clj datastore users)))
 
-(defn find-object [encoded-key]
-  (get-entity (KeyFactory/stringToKey encoded-key)))
+(defn format-date
+  "takes a map with a date key and formats it like 11/4/03 8:14 PM"
+  [entity-map]
+  (.. java.text.DateFormat
+      (getInstance)
+      (format (:date entity-map))))
 
-(defn find-boards []
-  (find-all (doto (Query. "Board") (.addSort "date"))))
-
-(defn find-posts []
-  (find-all (doto (Query. "Post") (.addSort "date"))))
-
-(defn posts-for [parent]
- (let [posts (find-all (doto (Query. "Post" (:key parent))
-                             (.addSort "date")))]
-   (filter #(= (:key parent) (.getParent (:key %)))
-           posts)))
-
-(defn except [parent posts]
+(defn except
+  "return a version of posts without parent"
+  [parent posts]
   (filter #(not= (:key parent) (:key %))
           posts))
 
@@ -29,6 +23,29 @@
              count
              (partial > depth))
            posts))
+
+(defn find-object
+  "take a base 64 encoded key and lookup it's entity"
+  [encoded-key]
+  (get-entity (KeyFactory/stringToKey encoded-key)))
+
+(defn find-boards
+  "get a list of all boards"
+  []
+  (find-all (doto (Query. "Board") (.addSort "date"))))
+
+(defn find-posts
+  "get a list of all posts"
+  []
+  (find-all (doto (Query. "Post") (.addSort "date"))))
+
+(defn posts-for
+  "find all posts below parent"
+  [parent]
+  (let [posts (find-all (doto (Query. "Post" (:key parent))
+                              (.addSort "date")))]
+    (filter #(= (:key parent) (.getParent (:key %)))
+            posts)))
 
 (defn do-create-board [user title message]
   (create {:kind "Board" :author user :title title :message message :date (java.util.Date.)}))
