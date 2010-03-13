@@ -2,9 +2,11 @@
   (:import (com.google.appengine.api.datastore
             DatastoreServiceFactory Entity Key Query KeyFactory)))
 
-(defn key-for
-  ([entity-map]
-    (:key entity-map))
+(defn get-key
+  ([map-or-str]
+    (if (instance? String map-or-str)
+      (KeyFactory/stringToKey map-or-str)
+      (:key map-or-str)))
   ([kind id]
     (KeyFactory/createKey (.toString kind) (Long/valueOf id))))
 

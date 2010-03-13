@@ -21,12 +21,24 @@
     (logged-in? (user-info)))
   ([info] (:user info)))
 
+(defn author?
+  "determines whether the currently logged in user the author of post"
+  [post]
+  (= (:user (user-info))
+     (:author post)))
+
 (defn admin?
-  "determine whether currently logged in user is an admin account"
+  "determine whether the currently logged in user is an admin account"
   []
   (let [info (user-info)]
     (if (logged-in? info)
       (-> info :user-service .isUserAdmin))))
+
+(defn owner?
+  "determine whether the current user has write/delete priviledges for post"
+  [post]
+  (or (author? post)
+      (admin? post)))
 
 (defn wrap-with-user-info
   "Ring middleware method that wraps an application so that every request will have

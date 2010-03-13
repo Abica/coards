@@ -31,6 +31,10 @@
   (POST (create-reply-url :key)
         (create-post request params (:key params)))
 
+  ; delete a post
+  (GET (delete-post-url :key)
+       (delete-post request params (:key params)))
+
   ; index
   (GET "/" (list-boards request))
 

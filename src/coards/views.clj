@@ -26,27 +26,34 @@
     (:message board)])
 
 (defn render-board-item [board]
-  (let [id (:encoded-key board)
+  (let [key (:encoded-key board)
         title (h (:title board))
         message (h (:message board))]
     [:div.topic-item
-      [:h2 (link-to (board-url id) title)]
+      [:h2 (link-to (board-url key) title)]
       [:p message]]))
 
+(defn render-post-options [post]
+  (let [key (:encoded-key post)]
+    [:div.options
+      [(link-to (delete-post-url key) "Delete")
+       (link-to (delete-post-url key) "Edit")]]))
+
 (defn render-full-post [post]
-  (let [id (:encoded-key post)
+  (let [key (:encoded-key post)
         title (h (:title post))
         author (:author post)]
     [:div#post
       [:div.post-body (h (:message post))]
-      [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
+      [:p "Posted by " (.getNickname author) " on " (format-date post)]
+      (if (owner? post) (render-post-options post))]))
 
 (defn render-post-item [board post]
-  (let [id (:encoded-key post)
+  (let [key (:encoded-key post)
         title (h (:title post))
         author (:author post)]
     [:div.topic-item
-      [:h3 (link-to (post-url id) title)]
+      [:h3 (link-to (post-url key) title)]
       [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
 
 (defn render-posts-for [board]

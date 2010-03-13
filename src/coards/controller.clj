@@ -49,3 +49,12 @@
                                       parent
                                       (:title params)
                                       (:body params)))))))
+
+(defn delete-post [request params encoded-key]
+  (let [parent (find-object encoded-key)]
+    (do-delete-post encoded-key)
+    (-> encoded-key
+        get-key
+        .getParent
+        url-for
+        redirect-to)))

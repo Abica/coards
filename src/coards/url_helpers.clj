@@ -19,6 +19,9 @@
 (defn create-reply-url [key]
   (str "/post/" key "/create-post.html"))
 
+(defn delete-post-url [key]
+  (str "/post/" key "/delete-post.html"))
+
 (defmulti url-for :kind)
 (defmethod url-for "Post" [x] (post-url (:encoded-key x)))
 (defmethod url-for "Board" [x] (board-url (:encoded-key x)))

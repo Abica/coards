@@ -27,7 +27,7 @@
 (defn find-object
   "take a base 64 encoded key and lookup it's entity"
   [encoded-key]
-  (get-entity (KeyFactory/stringToKey encoded-key)))
+  (-> encoded-key get-key get-entity))
 
 (defn find-boards
   "get a list of all boards"
@@ -53,3 +53,6 @@
 (defn do-create-post [user parent title message]
   (create {:kind "Post" :author user :title title :message message :date (java.util.Date.)}
           (:key parent)))
+
+(defn do-delete-post [encoded-key]
+  (-> encoded-key get-key delete))
