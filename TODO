@@ -12,6 +12,7 @@
   [ ] bubble replies by date order
   [x] handle posts without replies
   [ ] replies are still pretty inefficient and should be done in a single query
+  [ ] message preview in the form of alt text or tooltip
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin
