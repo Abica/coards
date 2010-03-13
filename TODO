@@ -3,7 +3,7 @@
   [x] sanitize display of html
 [ ] Posts
   [ ] cleanup the way posts are being queried
-  [ ] ability to delete posts
+  [x] ability to delete posts
   [x] fix the display of replies
   [ ] ability to edit posts
   [x] sanitize display of html
@@ -16,7 +16,7 @@
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin
-  [ ] Ability to delete any post
+  [x] Ability to delete any post
   [ ] Ability to delete any board
   [ ] Ability to edit any post
   [ ] Ability to edit any board
