@@ -46,5 +46,3 @@
                                       parent
                                       (:title params)
                                       (:body params)))))))
-
-(defn home [] (html [:h1 "Just you wait and see.."]))

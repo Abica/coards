@@ -32,7 +32,7 @@
         (create-post request params (:key params)))
 
   ; index
-  (GET "/" (home))
+  (GET "/" (list-boards request))
 
   ; static files and error handling
   (GET "/*" (or (serve-file (params :*)) :next))
