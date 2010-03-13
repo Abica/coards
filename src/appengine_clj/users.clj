@@ -38,7 +38,7 @@
   "determine whether the current user has write/delete priviledges for post"
   [post]
   (or (author? post)
-      (admin? post)))
+      (admin?)))
 
 (defn wrap-with-user-info
   "Ring middleware method that wraps an application so that every request will have

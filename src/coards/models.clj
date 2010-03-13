@@ -47,12 +47,15 @@
     (filter #(= (:key parent) (.getParent (:key %)))
             posts)))
 
-(defn do-create-board [user title message]
+(defn do-create-board
+  [user title message]
   (create {:kind "Board" :author user :title title :message message :date (java.util.Date.)}))
 
-(defn do-create-post [user parent title message]
+(defn do-create-post
+  [user parent title message]
   (create {:kind "Post" :author user :title title :message message :date (java.util.Date.)}
           (:key parent)))
 
-(defn do-delete-post [encoded-key]
+(defn do-delete-post
+  [encoded-key]
   (-> encoded-key get-key delete))

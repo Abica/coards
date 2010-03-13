@@ -65,6 +65,14 @@ a {
   text-decoration: none;
 }
 
+.options {
+  display: inline;
+}
+
+.option {
+  margin-left: 1em;
+}
+
 .post-header {
   text-decoration: underline;
   font-size: 2em;

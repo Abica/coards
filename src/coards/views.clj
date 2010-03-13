@@ -36,8 +36,9 @@
 (defn render-post-options [post]
   (let [key (:encoded-key post)]
     [:div.options
-      [(link-to (delete-post-url key) "Delete")
-       (link-to (delete-post-url key) "Edit")]]))
+      (map (fn [x] [:span.option x])
+           [(link-to (delete-post-url key) "(delete)")
+            (link-to (delete-post-url key) "(edit)")])]))
 
 (defn render-full-post [post]
   (let [key (:encoded-key post)
@@ -54,6 +55,7 @@
         author (:author post)]
     [:div.topic-item
       [:h3 (link-to (post-url key) title)]
+      (if (owner? post) (render-post-options post))
       [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
 
 (defn render-posts-for [board]
@@ -70,6 +72,7 @@
     (link-to (url-for post)
              (h (:title post)))
     " - " (.getNickname (:author post))
+    (if (owner? post) (render-post-options post))
     (-> post posts-for render-tree)])
 
 (defn render-tree [nodes]
