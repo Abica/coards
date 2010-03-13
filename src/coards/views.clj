@@ -12,35 +12,42 @@
       (if (logged-in?)
         [:div#add-comment
           (form-to [:post path]
-            [:p.post-title
+            [:p.post-form-title
               (label "title" "Title") [:br]
               (text-field "title")]
-            [:p.post-body
+            [:p.post-form-body
               (label "body" "Body") [:br]
               (text-area {:rows 25 :cols 65} "body")]
             (submit-button "Submit"))]
         [:div.please-login "Please login to contribute!"])]))
 
 (defn render-board [board]
+  [:div.board-body
+    (:message board)])
+
+(defn render-board-item [board]
   (let [id (:encoded-key board)
-        title (:title board)
-        message (:message board)]
+        title (h (:title board))
+        message (h (:message board))]
     [:div.topic-item
       [:h2 (link-to (board-url id) title)]
       [:p message]]))
 
 (defn render-full-post [post]
-  (let [id (:encoded-key post) title (:title post) author (:author post)]
+  (let [id (:encoded-key post)
+        title (h (:title post))
+        author (:author post)]
     [:div#post
-      [:h3.post-header title]
-      [:div.post-body (:message post)]
-      [:p "Posted by " (.getNickname author)]]))
+      [:div.post-body (h (:message post))]
+      [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
 
 (defn render-post-item [board post]
-  (let [id (:encoded-key post) title (:title post) author (:author post)]
+  (let [id (:encoded-key post)
+        title (h (:title post))
+        author (:author post)]
     [:div.topic-item
       [:h3 (link-to (post-url id) title)]
-      [:p "Posted by " (.getNickname author)]]))
+      [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
 
 (defn render-posts-for [board]
   (let [posts (posts-for board)]
@@ -54,7 +61,8 @@
 (defn render-node-link [post]
   [:li
     (link-to (url-for post)
-             (:title post))
+             (h (:title post)))
+    " - " (.getNickname (:author post))
     (-> post posts-for render-tree)])
 
 (defn render-tree [nodes]
@@ -64,4 +72,5 @@
 (defn render-replies-for [post]
   (let [posts (posts-for post)]
     [:div#replies
+      [:strong "Replies to this post"]
       (render-tree posts)]))

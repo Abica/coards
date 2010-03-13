@@ -8,14 +8,14 @@
 (defn list-boards [request]
   (layout request "Message boards"
     [:div#boards
-      (map render-board (find-boards))]
+      (map render-board-item (find-boards))]
     (render-comment-form (create-board-url) "Add Board" nil)))
 
 (defn view-board [request encoded-key]
   (let [board (find-object encoded-key)]
     (if board
       (layout request "Viewing board"
-        [:div#breadcrumb (breadcrumb-trail-for nil)]
+        [:div#breadcrumb (breadcrumb-trail-for board)]
         (render-board board)
         (render-posts-for board)
         (render-comment-form (create-post-url encoded-key) "Add Topic" board))

@@ -11,8 +11,11 @@
       [:li (link-to (key pair) (val pair))])])
 
 (defn breadcrumb-link-for [object]
-  [:span.breadcrumb
-    (link-to (url-for object) (:title object))])
+  (let [title (h (:title object))]
+    [:span.breadcrumb
+      (if (:text-only object)
+          title
+          (link-to (url-for object) title))]))
 
 (defn breadcrumb-trail-for [object]
   (let [parents
@@ -25,8 +28,10 @@
                       (concat [{:title "Boards"}]
                               (if (empty? parents)
                                   []
-                                  (map get-entity
-                                       (reverse (rest parents)))))))))
+                                  (concat (map get-entity
+                                              (reverse (rest parents)))
+                                          [(assoc (first parents)
+                                                  :text-only true)])))))))
 
 (defn render-login-link [request]
   (let [info (:appengine-clj/user-info request)

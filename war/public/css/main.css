@@ -43,12 +43,31 @@ a {
   border-bottom: 5px solid #570026;
 }
 
+.board-body, .post-body {
+  padding: 10px;
+  border: 1px solid #570026;
+  background: white;
+}
+
 #posts, #replies {
   margin-top: 1em;
 }
 
+#replies ul {
+  list-style-type: none;
+}
+
 #replies li {
-  margin-left: 1em;
+  margin-left: 2em;
+}
+
+#replies li a {
+  text-decoration: none;
+}
+
+.post-header {
+  text-decoration: underline;
+  font-size: 2em;
 }
 
 .post-body {
