@@ -10,7 +10,8 @@
   [ ] add support for a markup language
   [x] show author names and date/time of post
   [ ] bubble replies by date order
-  [ ] handle posts without replies
+  [x] handle posts without replies
+  [ ] replies are still pretty inefficient and should be done in a single query
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin

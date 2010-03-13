@@ -73,4 +73,6 @@
   (let [posts (posts-for post)]
     [:div#replies
       [:strong "Replies to this post"]
-      (render-tree posts)]))
+      (if (empty? posts)
+        [:p "There are no replies to this post. Be the first! Join the discussion!"]
+        (render-tree posts))]))
