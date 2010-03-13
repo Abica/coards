@@ -45,8 +45,8 @@
 (defn layout
   ([request title & body]
     (html
-      (doctype "xhtml/transitional")
-      [:html
+      (doctype :xhtml-strict)
+      (xhtml-tag "en"
         [:head
           (include-css "/css/main.css")
           (include-js "/js/app.js")
@@ -68,4 +68,4 @@
             (link-to "http://compojure.com" "Compojure")
             [:p
               "Brought to you by "
-              (link-to "http://github.com/Abica" "Abica")]]]])))
+              (link-to "http://github.com/Abica" "Abica")]]]))))

@@ -54,7 +54,8 @@
         title (h (:title post))
         author (:author post)]
     [:div.topic-item
-      [:h3 (link-to (post-url key) title)]
+      [:h3 {:title (:message post)}
+        (link-to (post-url key) title)]
       (if (owner? post) (render-post-options post))
       [:p "Posted by " (.getNickname author) " on " (format-date post)]]))
 
@@ -68,7 +69,7 @@
 (declare render-tree)
 
 (defn render-node-link [post]
-  [:li
+  [:li {:title (:message post)}
     (link-to (url-for post)
              (h (:title post)))
     " - " (.getNickname (:author post))

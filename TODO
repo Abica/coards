@@ -1,7 +1,9 @@
 [ ] Boards
   [x] ability to add boards needs to be admin only
   [x] sanitize display of html
+  [ ] Ability to delete any board
 [ ] Posts
+  [ ] turn \n -> <br />
   [ ] cleanup the way posts are being queried
   [x] ability to delete posts
   [x] fix the display of replies
@@ -12,7 +14,7 @@
   [ ] bubble replies by date order
   [x] handle posts without replies
   [ ] replies are still pretty inefficient and should be done in a single query
-  [ ] message preview in the form of alt text or tooltip
+  [x] message preview in the form of alt text or tooltip
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin
