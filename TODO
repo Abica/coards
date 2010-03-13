@@ -1,13 +1,16 @@
 [ ] Boards
   [ ] ability to add boards needs to be admin only
-  [ ] sanitize display of html
+  [x] sanitize display of html
 [ ] Posts
   [ ] cleanup the way posts are being queried
   [ ] ability to delete posts
   [x] fix the display of replies
   [ ] ability to edit posts
-  [ ] sanitize display of html
+  [x] sanitize display of html
   [ ] add support for a markup language
+  [x] show author names and date/time of post
+  [ ] bubble replies by date order
+  [ ] handle posts without replies
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin
@@ -16,3 +19,10 @@
   [ ] Ability to edit any post
   [ ] Ability to edit any board
   [ ] Ability to add or remove a user as an admin
+[ ] Overall
+  [ ] fix build script to download neccessary jars
+  [ ] add pretty 404 page for when a post/board is not found
+  [x] settle on either keys or ids throughout the app (keys for now)
+  [ ] test / test / test
+  [ ] document functions
+  [ ] refactor nasty bits and eliminate tech debt
