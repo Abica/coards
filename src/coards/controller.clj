@@ -11,40 +11,40 @@
       (map render-board (find-boards))]
     (render-comment-form (create-board-url) "Add Board" nil)))
 
-(defn view-board [request id]
-  (let [board (find-board id)]
+(defn view-board [request encoded-key]
+  (let [board (find-object encoded-key)]
     (if board
       (layout request "Viewing board"
         [:div#breadcrumb (breadcrumb-trail-for nil)]
         (render-board board)
         (render-posts-for board)
-        (render-comment-form (create-post-url id) "Add Topic" board))
+        (render-comment-form (create-post-url encoded-key) "Add Topic" board))
       (page-not-found))))
 
-(defn view-post [request post-id]
-  (let [post (find-post post-id)]
+(defn view-post [request encoded-key]
+  (let [post (find-object encoded-key)]
     (if post
       (layout request "Viewing post"
         [:div#breadcrumb (breadcrumb-trail-for post)]
         (render-full-post post)
         (render-replies-for post)
-        (render-comment-form (create-reply-url post-id) "Post Reply" post))
+        (render-comment-form (create-reply-url encoded-key) "Post Reply" post))
       (page-not-found))))
 
 (defn create-board [request params]
   (redirect-to
     (board-url
-      (:id (do-create-board (:user (:appengine-clj/user-info request))
-                            (:title params)
-                            (:body params))))))
+      (:encoded-key (do-create-board (:user (:appengine-clj/user-info request))
+                                     (:title params)
+                                     (:body params))))))
 
-(defn create-post [request params find-parent-func parent-id]
-  (let [parent (find-parent-func parent-id)]
+(defn create-post [request params parent-id]
+  (let [parent (find-object parent-id)]
     (redirect-to
       (post-url
-        (:id (do-create-post (:user (:appengine-clj/user-info request))
-                             parent
-                             (:title params)
-                             (:body params)))))))
+        (:encoded-key (do-create-post (:user (:appengine-clj/user-info request))
+                                      parent
+                                      (:title params)
+                                      (:body params)))))))
 
 (defn home [] (html [:h1 "Just you wait and see.."]))

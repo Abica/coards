@@ -5,7 +5,7 @@
 
 (defn render-comment-form
   ([post]
-    (render-comment-form (str "/add-comment/" (post :id)) "Add Comment" post))
+    (render-comment-form (str "/add-comment/" (post :encoded-key)) "Add Comment" post))
   ([path title post]
     [:div.comment-form
       [:h2 title]
@@ -22,7 +22,7 @@
         [:div.please-login "Please login to contribute!"])]))
 
 (defn render-board [board]
-  (let [id (:id board)
+  (let [id (:encoded-key board)
         title (:title board)
         message (:message board)]
     [:div.topic-item
@@ -30,14 +30,14 @@
       [:p message]]))
 
 (defn render-full-post [post]
-  (let [id (:id post) title (:title post) author (:author post)]
+  (let [id (:encoded-key post) title (:title post) author (:author post)]
     [:div#post
       [:h3.post-header title]
       [:div.post-body (:message post)]
       [:p "Posted by " (.getNickname author)]]))
 
 (defn render-post-item [board post]
-  (let [id (:id post) title (:title post) author (:author post)]
+  (let [id (:encoded-key post) title (:title post) author (:author post)]
     [:div.topic-item
       [:h3 (link-to (post-url id) title)]
       [:p "Posted by " (.getNickname author)]]))

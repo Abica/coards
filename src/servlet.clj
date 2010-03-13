@@ -12,24 +12,24 @@
         (list-boards request))
 
   ; view a board
-  (GET  (board-url :id)
-        (view-board request (:id params)))
+  (GET  (board-url :key)
+        (view-board request (:key params)))
 
   ; view a post
-  (GET  (post-url :id)
-        (view-post request (:id params)))
+  (GET  (post-url :key)
+        (view-post request (:key params)))
 
   ; create a new board
   (POST (create-board-url)
         (create-board request params))
 
   ; create a new topic
-  (POST (create-post-url :parent-id)
-        (create-post request params find-board (:parent-id params)))
+  (POST (create-post-url :key)
+        (create-post request params (:key params)))
 
   ; create a new reply
-  (POST (create-reply-url :parent-id)
-        (create-post request params find-post (:parent-id params)))
+  (POST (create-reply-url :key)
+        (create-post request params (:key params)))
 
   ; index
   (GET "/" (home))

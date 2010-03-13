@@ -4,22 +4,22 @@
 
 (defn boards-url [] "/boards.html")
 
-(defn board-url [id]
-  (str "/board/" id ".html"))
+(defn board-url [key]
+  (str "/board/" key ".html"))
 
-(defn post-url [post-id]
-  (str "/post/" post-id ".html"))
+(defn post-url [key]
+  (str "/post/" key ".html"))
 
 (defn create-board-url []
   "/admin/create-board.html")
 
-(defn create-post-url [board-id]
-  (str "/board/" board-id "/create-post.html"))
+(defn create-post-url [key]
+  (str "/board/" key "/create-post.html"))
 
-(defn create-reply-url [post-id]
-  (str "/post/" post-id "/create-post.html"))
+(defn create-reply-url [key]
+  (str "/post/" key "/create-post.html"))
 
 (defmulti url-for :kind)
-(defmethod url-for "Post" [x] (post-url (:id x)))
-(defmethod url-for "Board" [x] (board-url (:id x)))
+(defmethod url-for "Post" [x] (post-url (:encoded-key x)))
+(defmethod url-for "Board" [x] (board-url (:encoded-key x)))
 (defmethod url-for :default [x] (boards-url))

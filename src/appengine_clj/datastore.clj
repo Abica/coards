@@ -4,7 +4,7 @@
 
 (defn key-for
   ([entity-map]
-    (key-for (:kind entity-map) (:id entity-map)))
+    (:key entity-map))
   ([kind id]
     (KeyFactory/createKey (.toString kind) (Long/valueOf id))))
 
@@ -14,7 +14,10 @@
   plus the entity's kind stored under :kind and key stored under :key."
   [#^Entity entity]
   (reduce #(assoc %1 (keyword (key %2)) (val %2))
-    {:kind (.getKind entity) :key (.getKey entity) :id (.getId (.getKey entity))}
+    {:kind (.getKind entity)
+     :key (.getKey entity)
+     :encoded-key (KeyFactory/keyToString (.getKey entity))
+     :id (.getId (.getKey entity))}
     (.entrySet (.getProperties entity))))
 
 (defn get-entities

@@ -4,8 +4,8 @@
   (:use (coards layout utils url-helpers)
         (appengine-clj datastore users)))
 
-(defn find-board [id]
-  (get-entity (key-for "Board" id)))
+(defn find-object [encoded-key]
+  (get-entity (KeyFactory/stringToKey encoded-key)))
 
 (defn find-boards []
   (find-all (doto (Query. "Board") (.addSort "date"))))
@@ -29,13 +29,6 @@
              count
              (partial > depth))
            posts))
-
-;FIXME: figure out how to use PM.getObjectById
-(defn find-post [post-id]
-  (let [posts (find-posts)]
-    (first
-      (filter #(= (Long/valueOf post-id) (:id %))
-                   posts))))
 
 (defn do-create-board [user title message]
   (create {:kind "Board" :author user :title title :message message :date (java.util.Date.)}))
