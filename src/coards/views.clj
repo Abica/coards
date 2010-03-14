@@ -18,7 +18,8 @@
             [:p.post-form-body
               (label "body" "Body") [:br]
               (text-area {:rows 25 :cols 65} "body")]
-            (submit-button "Submit"))]
+            (submit-button "Submit")
+            (reset-button "Reset"))]
         [:div.please-login "Please login to contribute!"])]))
 
 (defn render-board [board]
