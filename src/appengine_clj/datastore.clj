@@ -59,6 +59,9 @@
       (.put (DatastoreServiceFactory/getDatastoreService) entity)
       (entity-to-map entity))))
 
+(defn edit [entity-map]
+  (.put (DatastoreServiceFactory/getDatastoreService) entity-map))
+
 (defn delete
   "Deletes the identified entities."
   [& #^Key keys]
