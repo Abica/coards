@@ -118,7 +118,7 @@ a {
   margin-top: 1em;
 }
 
-.comment-form input[type=text], editing {
+.comment-form input[type=text] {
   width: 50em;
   border: 2px solid #570026;
   padding: 10px;
