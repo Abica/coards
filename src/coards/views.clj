@@ -69,8 +69,9 @@
 (declare render-tree)
 
 (defn render-node-link [post]
-  [:li {:title (:message post)}
-    (link-to (url-for post)
+  [:li
+    (link-to {:title (:message post)}
+             (url-for post)
              (h (:title post)))
     " - " (.getNickname (:author post))
     (if (owner? post) (render-post-options post))

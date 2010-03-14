@@ -56,6 +56,6 @@
   (create {:kind "Post" :author user :title title :message message :date (java.util.Date.)}
           (:key parent)))
 
-(defn do-delete-post
+(defn do-delete-object
   [encoded-key]
   (-> encoded-key get-key delete))

@@ -7,6 +7,7 @@
   [ ] cleanup the way posts are being queried
   [x] ability to delete posts
   [x] fix the display of replies
+  [x] fix redirection after post deletion
   [ ] ability to edit posts
   [x] sanitize display of html
   [ ] add support for a markup language

@@ -1,5 +1,6 @@
 (ns coards.url-helpers
   (:use (compojure.html gen page-helpers form-helpers)
+        (appengine-clj datastore)
         (coards utils)))
 
 (defn boards-url [] "/boards.html")
@@ -25,4 +26,15 @@
 (defmulti url-for :kind)
 (defmethod url-for "Post" [x] (post-url (:encoded-key x)))
 (defmethod url-for "Board" [x] (board-url (:encoded-key x)))
-(defmethod url-for :default [x] (boards-url))
+(defmethod url-for :default [x]
+  (let [key (str x)
+        depth (count
+                (filter #(= \/ %) key))]
+    (cond
+      (zero? depth)
+        (boards-url)
+      (> depth 1)
+        (-> x encode-key post-url)
+      :else
+        (-> x encode-key board-url))))
+;(defmethod url-for :default [x] (boards-url);)

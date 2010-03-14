@@ -51,7 +51,7 @@
                                       (:body params)))))))
 
 (defn delete-post [request params encoded-key]
-  (do-delete-post encoded-key)
+  (do-delete-object encoded-key)
   (-> encoded-key
       get-key
       .getParent

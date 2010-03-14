@@ -10,6 +10,9 @@
   ([kind id]
     (KeyFactory/createKey (.toString kind) (Long/valueOf id))))
 
+(defn encode-key [key]
+ (KeyFactory/keyToString key))
+
 (defn entity-to-map
   "Converts an instance of com.google.appengine.api.datastore.Entity
   to a PersistentHashMap with properties stored under keyword keys,
@@ -18,7 +21,7 @@
   (reduce #(assoc %1 (keyword (key %2)) (val %2))
     {:kind (.getKind entity)
      :key (.getKey entity)
-     :encoded-key (KeyFactory/keyToString (.getKey entity))
+     :encoded-key (encode-key (.getKey entity))
      :id (.getId (.getKey entity))}
     (.entrySet (.getProperties entity))))
 
