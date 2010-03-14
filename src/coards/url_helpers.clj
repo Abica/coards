@@ -20,6 +20,9 @@
 (defn create-reply-url [key]
   (str "/post/" key "/create-post.html"))
 
+(defn edit-post-url [key]
+  (str "/post/" key "/edit-post.html"))
+
 (defn delete-post-url [key]
   (str "/post/" key "/delete-post.html"))
 

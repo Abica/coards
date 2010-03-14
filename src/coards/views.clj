@@ -40,14 +40,15 @@
       [:span.option.delete
            (link-to (delete-post-url key) "(delete)")]
       [:span.option.edit
-            (link-to (delete-post-url key) "(edit)")]]))
+            (link-to (edit-post-url key) "(edit)")]]))
 
 (defn render-full-post [post]
   (let [key (:encoded-key post)
         title (h (:title post))
         author (:author post)]
     [:div#post
-      [:div.post-body (h (:message post))]
+      [:div.post-body
+        (-> (:message post) h nl-to-br)]
       [:p "Posted by " (.getNickname author) " on " (format-date post)]
       (if (owner? post) (render-post-options post))]))
 
