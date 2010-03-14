@@ -37,9 +37,10 @@
 (defn render-post-options [post]
   (let [key (:encoded-key post)]
     [:div.options
-      (map (fn [x] [:span.option x])
-           [(link-to (delete-post-url key) "(delete)")
-            (link-to (delete-post-url key) "(edit)")])]))
+      [:span.option.delete
+           (link-to (delete-post-url key) "(delete)")]
+      [:span.option.edit
+            (link-to (delete-post-url key) "(edit)")]]))
 
 (defn render-full-post [post]
   (let [key (:encoded-key post)

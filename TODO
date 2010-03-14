@@ -25,6 +25,7 @@
   [ ] Ability to edit any board
   [ ] Ability to add or remove a user as an admin
 [ ] Overall
+  [x] all dangerous operations need confirmation dialogs
   [ ] add some sort of feedback such as flash messages
   [ ] fix build script to download neccessary jars
   [ ] add pretty 404 page for when a post/board is not found
