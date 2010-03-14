@@ -15,16 +15,16 @@
   "/admin/create-board.html")
 
 (defn create-post-url [key]
-  (str "/board/" key "/create-post.html"))
+  (str "/board/" key "/post/create.html"))
 
 (defn create-reply-url [key]
-  (str "/post/" key "/create-post.html"))
+  (str "/post/" key "/create.html"))
 
 (defn edit-post-url [key]
-  (str "/post/" key "/edit-post.html"))
+  (str "/post/" key "/edit.html"))
 
 (defn delete-post-url [key]
-  (str "/post/" key "/delete-post.html"))
+  (str "/post/" key "/delete.html"))
 
 (defmulti url-for :kind)
 (defmethod url-for "Post" [x] (post-url (:encoded-key x)))

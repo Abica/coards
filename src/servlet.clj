@@ -31,7 +31,12 @@
   (POST (create-reply-url :key)
         (create-post request params (:key params)))
 
+  ; edit a post
+  (PUT (edit-post-url :key)
+       (edit-post request params (:key params)))
+
   ; delete a post
+  ; FIXME: this needs to not be a GET
   (GET (delete-post-url :key)
        (delete-post request params (:key params)))
 

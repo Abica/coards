@@ -43,7 +43,17 @@ a {
   border-bottom: 5px solid #570026;
 }
 
+.editing input, .editing textarea {
+  border: 1px solid #570026;
+  background: #fffed9;
+}
+
+.close-editing, .save-post {
+  display: none;
+}
+
 .board-body, .post-body {
+  display: block;
   padding: 10px;
   border: 1px solid #570026;
   background: white;
@@ -82,6 +92,11 @@ a {
   margin-bottom: 1em;
 }
 
+.post-body textarea {
+  width: 100%;
+  height: 100%;
+}
+
 .user {
   float: right;
   padding: 10px;
@@ -103,7 +118,7 @@ a {
   margin-top: 1em;
 }
 
-.comment-form input[type=text] {
+.comment-form input[type=text], editing {
   width: 50em;
   border: 2px solid #570026;
   padding: 10px;

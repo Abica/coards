@@ -38,9 +38,21 @@
   (let [key (:encoded-key post)]
     [:div.options
       [:span.option.delete
-           (link-to (delete-post-url key) "(delete)")]
-      [:span.option.edit
-            (link-to (edit-post-url key) "(edit)")]]))
+           (link-to
+             (str (post-url key) "#/delete")
+             "(delete)")]
+      [:span.option.start-editing
+            (link-to
+              (str (post-url key) "#/edit")
+              "(edit)")]
+      [:span.option.save-post
+            (link-to
+              (str (post-url key) "#/edit/save")
+              "(save and finish editing)")]
+      [:span.option.close-editing
+            (link-to
+              (str (post-url key) "#/edit/cancel")
+              "(cancel edit)")]]))
 
 (defn render-full-post [post]
   (let [key (:encoded-key post)
