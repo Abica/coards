@@ -10,6 +10,5 @@
   (seq (.split str delim)))
 
 (defn nl-to-br [str]
-  (println (split str "\n"))
   (interpose [:br]
     (split str "\n")))

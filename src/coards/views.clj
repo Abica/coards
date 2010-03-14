@@ -48,7 +48,8 @@
         author (:author post)]
     [:div#post
       [:div.post-body
-        (-> (:message post) h nl-to-br)]
+        [:pre
+          (-> post :message h)]]
       [:p "Posted by " (.getNickname author) " on " (format-date post)]
       (if (owner? post) (render-post-options post))]))
 
