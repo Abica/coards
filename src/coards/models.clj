@@ -49,12 +49,27 @@
 
 (defn do-create-board
   [user title message]
-  (create {:kind "Board" :author user :title title :message message :date (java.util.Date.)}))
+  (create {:kind "Board"
+           :author user
+           :title title
+           :message message
+           :date (java.util.Date.)}))
 
 (defn do-create-post
   [user parent title message]
-  (create {:kind "Post" :author user :title title :message message :date (java.util.Date.)}
+  (create {:kind "Post"
+           :author user
+           :title title
+           :message message
+           :date (java.util.Date.)}
           (:key parent)))
+
+(defn do-edit-post
+  [encoded-key params]
+  (edit {:key (get-key encoded-key)
+         :title (:title params)
+         :message (:message params)
+         :updated-date (java.util.Date.)}))
 
 (defn do-delete-object
   [encoded-key]

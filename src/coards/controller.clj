@@ -41,14 +41,19 @@
                                        (:body params)))))
     (page-not-found)))
 
-(defn create-post [request params parent-id]
-  (let [parent (find-object parent-id)]
+(defn create-post [request params encoded-parent-key]
+  (let [parent (find-object encoded-parent-key)]
     (redirect-to
       (post-url
         (:encoded-key (do-create-post (:user (:appengine-clj/user-info request))
                                       parent
                                       (:title params)
                                       (:body params)))))))
+
+(defn edit-post [request params encoded-key]
+  (do-edit-post
+    (assoc params :key (-> encoded-key get-key)))
+  "Successfully edited post!")
 
 (defn delete-post [request params encoded-key]
   (do-delete-object encoded-key)
