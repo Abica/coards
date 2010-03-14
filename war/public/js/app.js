@@ -7,7 +7,7 @@ $( function() {
     // dipsplay index
     this.get( "#/", function( context ) {
 
-    }
+    } );
 
     // delete an object
     this.get( "#/delete", function( context ) {
