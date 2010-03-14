@@ -1,9 +1,10 @@
 [ ] Boards
   [x] ability to add boards needs to be admin only
   [x] sanitize display of html
-  [ ] Ability to delete any board
+  [ ] ability to delete any board
+  [ ] add validations
 [ ] Posts
-  [ ] turn \n -> <br />
+  [x] turn \n -> <br />
   [ ] cleanup the way posts are being queried
   [x] ability to delete posts
   [x] fix the display of replies
@@ -16,14 +17,15 @@
   [x] handle posts without replies
   [ ] replies are still pretty inefficient and should be done in a single query
   [x] message preview in the form of alt text or tooltip
+  [ ] add validations
 [ ] Settings
   [ ] allow users to view replies in a flat or threaded form
 [ ] Admin
-  [x] Ability to delete any post
-  [ ] Ability to delete any board
-  [ ] Ability to edit any post
-  [ ] Ability to edit any board
-  [ ] Ability to add or remove a user as an admin
+  [x] ability to delete any post
+  [ ] ability to delete any board
+  [ ] ability to edit any post
+  [ ] ability to edit any board
+  [ ] ability to add or remove a user as an admin
 [ ] Overall
   [x] all dangerous operations need confirmation dialogs
   [ ] add some sort of feedback such as flash messages
