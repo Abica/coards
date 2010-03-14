@@ -49,6 +49,7 @@
       (xhtml-tag "en"
         [:head
           (include-css "/css/main.css")
+          (include-js "/js/jquery-1.4.2.js")
           (include-js "/js/app.js")
           [:title title]]
         [:body
