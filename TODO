@@ -9,7 +9,7 @@
   [x] ability to delete posts
   [x] fix the display of replies
   [x] fix redirection after post deletion
-  [ ] ability to edit posts
+  [x] ability to edit posts
   [x] sanitize display of html
   [ ] add support for a markup language
   [x] show author names and date/time of post
@@ -23,7 +23,7 @@
 [ ] Admin
   [x] ability to delete any post
   [ ] ability to delete any board
-  [ ] ability to edit any post
+  [x] ability to edit any post
   [ ] ability to edit any board
   [ ] ability to add or remove a user as an admin
 [ ] Overall
