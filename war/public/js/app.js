@@ -1,5 +1,6 @@
+// toggle the show/hide/save edit forms
 function toggleOptions() {
-  $( ".start-editing, .close-editing, .save-post" ).toggle();
+  $( "#post .start-editing, #post .close-editing, #post .save-post" ).toggle();
 }
 
 $( function() {
