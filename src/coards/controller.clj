@@ -51,8 +51,9 @@
                                       (:body params)))))))
 
 (defn edit-post [request params encoded-key]
-  (do-edit-post
-    (assoc params :key (-> encoded-key get-key)))
+  (do-update-object
+    (dissoc params :key)
+    (-> encoded-key get-key))
   "Successfully edited post!")
 
 (defn delete-post [request params encoded-key]

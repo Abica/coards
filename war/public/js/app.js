@@ -55,11 +55,12 @@ $( function() {
       if ( title.hasClass( editing_class ) ) {
         var params = {
           title: title.find( "input:text" ).val(),
-          body: body.find( "textarea" ).val()
+          message: body.find( "textarea" ).val()
         };
 
         title.data( "original-text", params.title );
-        body.data( "original-text", params.body );
+        body.data( "original-text", params.message );
+        $.post( location.href.replace( /(\.html#.*?$)/, "/edit.html" ), params );
 
         this.redirect( "#/edit/cancel" );
       }
@@ -79,10 +80,10 @@ $( function() {
         title.removeClass( editing_class );
         body.removeClass( editing_class );
 
-        this.redirect( "#" );
+        this.redirect( "#/" );
       }
     } );
   } );
 
-  app.run( "#" );
+  app.run( "#/" );
 } );

@@ -64,12 +64,9 @@
            :date (java.util.Date.)}
           (:key parent)))
 
-(defn do-edit-post
-  [encoded-key params]
-  (edit {:key (get-key encoded-key)
-         :title (:title params)
-         :message (:message params)
-         :updated-date (java.util.Date.)}))
+(defn do-update-object
+  [params #^Key key]
+  (update params key))
 
 (defn do-delete-object
   [encoded-key]

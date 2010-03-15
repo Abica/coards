@@ -59,8 +59,16 @@
       (.put (DatastoreServiceFactory/getDatastoreService) entity)
       (entity-to-map entity))))
 
-(defn edit [entity-map]
-  (.put (DatastoreServiceFactory/getDatastoreService) entity-map))
+(defn update
+  "Takes a map of params and a key to an existing entity and updates it.
+   Also adds an updated-date timestamp to the entity"
+  [params #^Key key]
+  (let [entity (.get (DatastoreServiceFactory/getDatastoreService) key)
+        updated-params (assoc params :updated-date (java.util.Date.))]
+    (doseq [[prop-name value] updated-params]
+      (.setProperty entity (name prop-name) value))
+    (.put (DatastoreServiceFactory/getDatastoreService) entity)
+    (entity-to-map entity)))
 
 (defn delete
   "Deletes the identified entities."
