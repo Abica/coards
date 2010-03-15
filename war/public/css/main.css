@@ -20,7 +20,7 @@ a {
   content: " | ";
 }
 
-#nav > li.first {
+#nav > li.first:before {
   content: "";
 }
 

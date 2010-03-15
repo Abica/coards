@@ -3,13 +3,6 @@
         (appengine-clj datastore users)
         (coards url-helpers)))
 
-(defn navigation-links
-  "takes a map in the form of {url text} and creates a navigation"
-  [links]
-  [:ul#nav
-    (for [pair links]
-      [:li (link-to (key pair) (val pair))])])
-
 (defn breadcrumb-link-for [object]
   (let [title (h (:title object))]
     [:span.breadcrumb
@@ -58,9 +51,12 @@
             [:h1#logo "Coards"]
             [:div#nav-container
               (render-login-link request)
-              (navigation-links {(boards-url)   "Boards"
-                                 "http://github.com/Abica/coards" "Source Code"})]
-            [:div.clear]]
+              [:ul#nav
+                [:li.first
+                  (link-to (boards-url) "Boards")]
+                [:li
+                  (link-to "http://github.com/Abica/coards" "Source Code")]]
+              [:div.clear]]]
           [:div#content
              body]
           [:div#footer
