@@ -41,7 +41,7 @@
       (doctype :xhtml-strict)
       (xhtml-tag "en"
         [:head
-          (include-css "/css/main.css")
+          (include-css "http://github.com/Abica/coards/raw/master/war/public/css/main.css")
           (include-js "/js/jquery-1.4.2.js")
           (include-js "/js/sammy.js")
           (include-js "/js/app.js")
